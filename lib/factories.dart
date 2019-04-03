@@ -30,6 +30,7 @@ MockDocumentReference createDocumentReferance(String key, Map<String, dynamic> v
   MockDocumentReference r = MockDocumentReference();
   MockDocumentSnapshot s = createDocumentSnapshot(key, value);
   when(r.get()).thenAnswer((_) => Future.value(s));
+  when(r.delete()).thenAnswer((_) => Future.value());
   return r;
 }
 
