@@ -8,7 +8,7 @@ MockQuerySnapshot createMockQuerySnapshot(Map<String, dynamic> colData,
   List<MockDocumentChange> docChangeList = [];
   List<MockDocumentSnapshot> docSnapList = [];
   colData.forEach((String key, dynamic value) {
-    MockDocumentSnapshot ds = createDocumentSnapshot(value);
+    MockDocumentSnapshot ds = createDocumentSnapshot(key, value);
     docSnapList.add(ds);
   });
   added.forEach((value) {
@@ -37,7 +37,7 @@ MockDocumentReference createDocumentReferance(Map<String, dynamic> value) {
 MockDocumentChange createDocumentChange(
     Map<String, dynamic> value, DocumentChangeType type) {
   MockDocumentChange dc = MockDocumentChange();
-  MockDocumentSnapshot ds = createDocumentSnapshot(value);
+  MockDocumentSnapshot ds = createDocumentSnapshot("not_implemented", value);
   when(dc.oldIndex).thenReturn(-1);
   when(dc.newIndex).thenReturn(-1);
   when(dc.type).thenReturn(type);
@@ -45,8 +45,9 @@ MockDocumentChange createDocumentChange(
   return dc;
 }
 
-MockDocumentSnapshot createDocumentSnapshot(Map<String, dynamic> value) {
+MockDocumentSnapshot createDocumentSnapshot(String documentId, Map<String, dynamic> value) {
   MockDocumentSnapshot ds = MockDocumentSnapshot();
+  when(ds.documentID).thenReturn(documentId);
   when(ds.data).thenReturn(value);
   return ds;
 }
