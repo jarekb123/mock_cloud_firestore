@@ -31,6 +31,7 @@ MockDocumentReference createDocumentReferance(Map<String, dynamic> value) {
   MockDocumentSnapshot s = MockDocumentSnapshot();
   when(s.data).thenReturn(value);
   when(r.get()).thenAnswer((_) => Future.value(s));
+  when(r.delete()).thenAnswer((_) => Future.value());
   return r;
 }
 
